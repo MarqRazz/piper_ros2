@@ -1,4 +1,4 @@
-[![Format (Humble)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml/badge.svg)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml.yaml)
+[![Format](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml/badge.svg)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml.yaml)
 
 # Piper ROS2
 
