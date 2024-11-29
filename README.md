@@ -24,7 +24,7 @@ ros2 launch piper_bringup piper.launch.xml mock_hardware:=true
 ## Simulating with Gazebo Fortress
 
 ```
-ros2 launch piper_bringup gazebo_piper.launch.py
+ros2 launch piper_bringup gazebo_piper.launch.py headless:=false rviz:=true
 ```
 
 ## Testing Available ROS2 Controllers
