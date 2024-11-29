@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- This launch file currently only supports mock hardware -->
+    <arg name="mock_hardware" default="true" />
+    <let name="robot_description"
+         value="$(command 'xacro $(find-pkg-share piper_description)/urdf/piper.urdf.xacro
+                  mock_hardware:=$(var mock_hardware)
+         ')" />
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" output="both">
+        <param name="robot_description" value="$(var robot_description)" />
+    </node>
+
+    <!-- ros2_control -->
+    <node pkg="controller_manager" exec="ros2_control_node" output="both">
+        <remap from="~/robot_description" to="/robot_description" />
+        <param from="$(find-pkg-share piper_description)/config/mock_controllers.yaml" />
+    </node>
+
+    <!-- ros2_control spawners -->
+    <node pkg="controller_manager" exec="spawner"
+          args="joint_trajectory_controller gripper_controller joint_state_broadcaster -c /controller_manager" />
+
+    <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share piper_bringup)/rviz/robotmodel.rviz" output="both"/>
+</launch>

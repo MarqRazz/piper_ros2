@@ -1,0 +1,8 @@
+# start the robot just above the joint limits because Gazebo can get stuck if it overshoots
+# and gets on the negative side of the limit.
+joint_1: 0.0
+joint_2: 0.01
+joint_3: -0.01
+joint_4: 0.0
+joint_5: 0.0
+joint_6: 0.0

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="piper_ros2_control" params="
+    name
+    prefix
+    include_gripper:=true
+    mock_hardware:=false
+    fake_sensor_commands:=false
+    sim_gazebo:=false
+    sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <xacro:if value="${sim_gazebo}">
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${sim_isaac}">
+          <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+          <param name="joint_commands_topic">${isaac_joint_commands}</param>
+          <param name="joint_states_topic">${isaac_joint_states}</param>
+        </xacro:if>
+        <xacro:if value="${mock_hardware}">
+          <plugin>mock_components/GenericSystem</plugin>
+          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="state_following_offset">0.0</param>
+        </xacro:if>
+        <!-- Hardware does not support ros2_control
+        <xacro:unless value="${mock_hardware or sim_gazebo or sim_ignition or sim_isaac}">
+          ...
+        </xacro:unless>
+        -->
+      </hardware>
+
+      <joint name="${prefix}joint_1">
+        <command_interface name="position">
+          <param name="min">-2.618</param>
+          <param name="max">2.618</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_1']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_2">
+        <command_interface name="position">
+          <param name="min">0.0</param>
+          <param name="max">{pi}</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_2']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_3">
+        <command_interface name="position">
+          <param name="min">-2.967</param>
+          <param name="max">0</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_3']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_4">
+        <command_interface name="position">
+          <param name="min">-1.832</param>
+          <param name="max">1.832</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_4']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_5">
+        <command_interface name="position">
+          <param name="min">-1.22</param>
+          <param name="max">1.22</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_5']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_6">
+        <command_interface name="position">
+          <param name="min">-{pi}</param>
+          <param name="max">{pi}</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_6']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <xacro:if value="${include_gripper}">
+        <joint name="${prefix}gripper_joint">
+          <command_interface name="position"/>
+          <state_interface name="position">
+            <param name="initial_value">0.01</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+          <state_interface name="effort"/>
+        </joint>
+      </xacro:if>
+    </ros2_control>
+  </xacro:macro>
+
+</robot>

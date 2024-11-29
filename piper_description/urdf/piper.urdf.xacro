@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot name="piper" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Arguments -->
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="sim_gazebo" default="false" />
+    <xacro:arg name="sim_isaac" default="false" />
+    <xacro:arg name="mock_hardware" default="false" />
+
+    <!-- Import macros for main hardware components -->
+    <xacro:include filename="$(find piper_description)/urdf/piper_macro.xacro" />
+    <!-- initial position for simulation -->
+    <xacro:arg name="initial_positions_file" default="$(find piper_description)/config/initial_positions.yaml"/>
+    <!-- convert to property to use substitution in function -->
+    <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+
+    <link name="world" />
+    <xacro:load_piper
+        parent="world"
+        prefix="$(arg prefix)"
+        mock_hardware="$(arg mock_hardware)"
+        sim_gazebo="$(arg sim_gazebo)"
+        sim_isaac="$(arg sim_isaac)"
+        initial_positions="${xacro.load_yaml(initial_positions_file)}">
+      <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
+    </xacro:load_piper>
+
+    <xacro:if value="$(arg sim_gazebo)">
+        <xacro:include filename="$(find piper_description)/urdf/piper.gazebo.xacro" />
+        <xacro:arg name="simulation_controllers" default="$(find piper_description)/config/gz_controllers.yaml" />
+        <xacro:piper_gazebo_plugins
+            simulation_controllers="$(arg simulation_controllers)"/>
+    </xacro:if>
+
+</robot>
