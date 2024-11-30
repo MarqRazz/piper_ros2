@@ -48,7 +48,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 
 - To send an action goal to the `gripper_controller`:
 ```bash
-ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command: {position: 0.03}}"
+ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [gripper_joint], position: [0.03]}}"
 ```
 
 ## Git LFS
