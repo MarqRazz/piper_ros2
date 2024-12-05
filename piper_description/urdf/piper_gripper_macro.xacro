@@ -96,5 +96,14 @@
       <axis xyz="0 -1 0" />
       <limit lower="0" upper="0.038" effort="5" velocity="1" />
     </joint>
+
+    <!-- The auxiliary mount frame is located on the back side of the grippers flange.
+    If you are mounting to the front side of the flange it is 7mm thick -->
+    <link name="${prefix}gripper_aux_mount" />
+    <joint name="${prefix}gripper_aux_mount_joint" type="fixed">
+      <origin xyz="0.036 0 0.048" rpy="${pi} ${-pi/2} 0" />
+      <parent link="${prefix}gripper_base_link" />
+      <child link="${prefix}gripper_aux_mount" />
+    </joint>
   </xacro:macro>
 </robot>

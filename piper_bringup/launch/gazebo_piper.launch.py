@@ -144,7 +144,7 @@ def generate_launch_description():
         executable="parameter_bridge",
         parameters=[{"use_sim_time": True}],
         arguments=[
-            "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
+            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
         ],
         output="screen",
     )

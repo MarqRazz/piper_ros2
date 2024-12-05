@@ -1,4 +1,4 @@
-[![Format (Humble)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml/badge.svg)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml.yaml)
+[![Format](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml/badge.svg)](https://github.com/MarqRazz/piper_ros2/actions/workflows/format.yaml.yaml)
 
 # Piper ROS2
 
@@ -21,10 +21,10 @@ ros2 launch piper_description view_urdf.launch.xml
 ros2 launch piper_bringup piper.launch.xml mock_hardware:=true
 ```
 
-## Simulating with Gazebo Fortress
+## Simulating with Gazebo
 
 ```
-ros2 launch piper_bringup gazebo_piper.launch.py
+ros2 launch piper_bringup gazebo_piper.launch.py headless:=false rviz:=true
 ```
 
 ## Testing Available ROS2 Controllers
@@ -48,7 +48,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 
 - To send an action goal to the `gripper_controller`:
 ```bash
-ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command: {position: 0.03}}"
+ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [gripper_joint], position: [0.03]}}"
 ```
 
 ## Git LFS
