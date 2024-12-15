@@ -62,7 +62,7 @@
       <parent link="${prefix}base_link" />
       <child link="${prefix}link_1" />
       <axis xyz="0 0 1" />
-      <limit lower="-2.618" upper="2.618" effort="5" velocity="1" />
+      <limit lower="-2.68" upper="2.68" effort="100" velocity="3.14" />
     </joint>
     <link name="${prefix}link_2">
       <inertial>
@@ -92,7 +92,7 @@
       <parent link="${prefix}link_1" />
       <child link="${prefix}link_2" />
       <axis xyz="0 0 1" />
-      <limit lower="0" upper="${pi}" effort="5" velocity="1" />
+      <limit lower="0" upper="3.4" effort="100" velocity="3.4" />
     </joint>
     <link name="${prefix}link_3">
       <inertial>
@@ -123,7 +123,7 @@
       <parent link="${prefix}link_2" />
       <child link="${prefix}link_3" />
       <axis xyz="0 0 1" />
-      <limit lower="-2.967" upper="0" effort="5" velocity="1" />
+      <limit lower="-3.0" upper="0" effort="100" velocity="3.14" />
     </joint>
     <link name="${prefix}link_4">
       <inertial>
@@ -153,7 +153,7 @@
       <parent link="${prefix}link_3" />
       <child link="${prefix}link_4" />
       <axis xyz="0 0 -1" />
-      <limit lower="-1.832" upper="1.832" effort="5" velocity="1" />
+      <limit lower="-1.85" upper="1.85" effort="100" velocity="3.93" />
     </joint>
     <link name="${prefix}link_5">
       <inertial>
@@ -183,7 +183,7 @@
       <parent link="${prefix}link_4" />
       <child link="${prefix}link_5" />
       <axis xyz="0 0 1" />
-      <limit lower="-1.22" upper="1.22" effort="5" velocity="1" />
+      <limit lower="-1.3" upper="1.3" effort="100" velocity="3.93" />
     </joint>
     <link name="${prefix}link_6" />
     <joint name="${prefix}joint_6" type="revolute">
@@ -191,7 +191,7 @@
       <parent link="${prefix}link_5" />
       <child link="${prefix}link_6" />
       <axis xyz="0 0 -1" />
-      <limit lower="-${pi}" upper="${pi}" effort="5" velocity="1" />
+      <limit lower="-${pi}" upper="${pi}" effort="100" velocity="3.93" />
     </joint>
     <link name="${prefix}tool_0" />
     <joint name="${prefix}tool_0_joint" type="fixed">
