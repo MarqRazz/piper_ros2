@@ -22,7 +22,9 @@ from ament_index_python.packages import get_package_share_directory
 
 
 def launch_gz(context: LaunchContext):
-    gz_world_file = get_package_share_directory("piper_bringup") + "/worlds/table.sdf"
+    gz_world_file = (
+        get_package_share_directory("piper_bringup") + "/worlds/empty_world.sdf"
+    )
     # -r is to run the simulation on start
     # -v is the verbose level
     #  0: No output, 1: Error, 2: Error and warning, 3: Error, warning, and info, 4: Error, warning, info, and debug.
@@ -128,7 +130,7 @@ def generate_launch_description():
             "-y",
             "0.0",
             "-z",
-            "1.02",
+            "0.02",
             "-R",
             "0.0",
             "-P",
