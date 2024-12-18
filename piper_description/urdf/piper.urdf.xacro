@@ -14,9 +14,26 @@
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
 
-    <link name="world" />
+    <link name="table">
+        <visual>
+            <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.0 1.0 0.04"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.0 1.0 0.04"/>
+            </geometry>
+        </collision>
+    </link>
+
     <xacro:load_piper
-        parent="world"
+        parent="table"
         prefix="$(arg prefix)"
         mock_hardware="$(arg mock_hardware)"
         sim_gazebo="$(arg sim_gazebo)"

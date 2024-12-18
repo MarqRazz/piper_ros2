@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+    <arg name="rviz" default="false"/>
     <!-- This launch file currently only supports mock hardware -->
     <arg name="mock_hardware" default="true" />
     <let name="robot_description"
@@ -21,5 +22,7 @@
     <node pkg="controller_manager" exec="spawner"
           args="joint_trajectory_controller gripper_controller joint_state_broadcaster -c /controller_manager" />
 
-    <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share piper_bringup)/rviz/robotmodel.rviz" output="both"/>
+    <group if="$(var rviz)">
+        <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share piper_bringup)/rviz/robotmodel.rviz" output="both"/>
+    </group>
 </launch>
