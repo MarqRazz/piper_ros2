@@ -29,16 +29,16 @@ ros2 launch piper_bringup gazebo_piper.launch.py headless:=false rviz:=true
 
 ## MoveIt Example Configuration
 
-To try out the included MoveIt configuration first start the robot with Mock Hardware or Gazebo.
+To try out the included MoveIt configuration you can use Mock Hardware or Gazebo.
 
 If simulating with Mock Hardware no additional arguments are needed to start Moveit.
 ```
 ros2 launch piper_moveit_config demo.launch.xml
 ```
 
-If simulating with Gazebo we need to tell MoveIt to use the clock published by the simulator:
+If simulating with Gazebo:
 ```
-ros2 launch piper_moveit_config demo.launch.xml use_sim_time:=true
+ros2 launch piper_moveit_config demo.launch.xml sim_gazebo:=true
 ```
 
 ## Testing Available ROS2 Controllers

@@ -14,6 +14,13 @@
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
 
+    <link name="world"/>
+    <joint name="world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="table"/>
+      <origin xyz="0 0 1.0" rpy="0 0 0" />
+    </joint>
+
     <link name="table">
         <visual>
             <origin xyz="0 0 -0.02" rpy="0 0 0"/>
