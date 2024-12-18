@@ -16,7 +16,6 @@
         <param from="$(find-pkg-share piper_moveit_config)/config/kinematics.yaml" />
         <param from="$(find-pkg-share piper_moveit_config)/config/joint_limits.yaml" />
         <param from="$(find-pkg-share piper_moveit_config)/config/moveit_controllers.yaml" />
-        <!-- <param name="capabilities" value="move_group/ExecuteTaskSolutionCapability" /> only needed with MTC-->
         <param name="publish_robot_description_semantic" value="true" />
         <param name="use_sim_time" value="$(var use_sim_time)" />
     </node>

@@ -173,6 +173,3 @@
           - SPARSkConfigDefault
           - SPARStwokConfigDefault
           - TrajOptDefault
-      gripper:
-        planner_configs:
-          - RRTkConfigDefault
