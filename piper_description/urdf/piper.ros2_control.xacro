@@ -8,6 +8,7 @@
     mock_hardware:=false
     fake_sensor_commands:=false
     sim_gazebo:=false
+    sim_ignition:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
@@ -28,11 +29,11 @@
           <param name="fake_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
-        <!-- Hardware does not support ros2_control
         <xacro:unless value="${mock_hardware or sim_gazebo or sim_ignition or sim_isaac}">
-          ...
+          <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+          <param name="joint_commands_topic">/pos_cmd</param>
+          <param name="joint_states_topic">/joint_states_single</param>
         </xacro:unless>
-        -->
       </hardware>
 
       <joint name="${prefix}joint_1">
