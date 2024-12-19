@@ -29,20 +29,18 @@
       </xacro:piper_gripper>
     </xacro:if>
 
-    <xacro:if value="${mock_hardware or sim_gazebo or sim_isaac}">
-      <!-- ros2 control is only used for simulation -->
-      <xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
-      <xacro:property name="ros2_control_name" value="${prefix}piper_control"/>
-      <xacro:piper_ros2_control
-        name="${ros2_control_name}"
-        prefix="${prefix}"
-        include_gripper="${include_gripper}"
-        mock_hardware="${mock_hardware}"
-        sim_isaac="${sim_isaac}"
-        isaac_joint_commands="${isaac_joint_commands}"
-        isaac_joint_states="${isaac_joint_states}"
-        sim_gazebo="${sim_gazebo}"
-        initial_positions="${initial_positions}"/>
-    </xacro:if>
+    <!-- ros2 control is only used for simulation -->
+    <xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
+    <xacro:property name="ros2_control_name" value="${prefix}piper_control"/>
+    <xacro:piper_ros2_control
+      name="${ros2_control_name}"
+      prefix="${prefix}"
+      include_gripper="${include_gripper}"
+      mock_hardware="${mock_hardware}"
+      sim_isaac="${sim_isaac}"
+      isaac_joint_commands="${isaac_joint_commands}"
+      isaac_joint_states="${isaac_joint_states}"
+      sim_gazebo="${sim_gazebo}"
+      initial_positions="${initial_positions}"/>
   </xacro:macro>
 </robot>
