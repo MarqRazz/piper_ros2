@@ -22,4 +22,13 @@
           args="joint_trajectory_controller gripper_controller joint_state_broadcaster -c /controller_manager" />
 
     <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share piper_bringup)/rviz/robotmodel.rviz" output="both"/>
+
+    <!-- official python CAN driver -->
+    <node pkg="piper" exec="piper_single_ctrl" output="both">
+        <param name="can_port" value="can0"/>
+        <param name="auto_enable" value="true"/>
+        <param name="rviz_ctrl_flag" value="false"/>
+        <param name="gripper_exist" value="true"/>
+    </node>
+
 </launch>
