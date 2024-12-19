@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="rviz" default="true"/>
+    <arg name="sim_gazebo" default="false"/>
+
+    <group if="$(var sim_gazebo)">
+        <include file="$(find-pkg-share piper_bringup)/launch/gazebo_piper.launch.py"/>
+    </group>
+    <group unless="$(var sim_gazebo)">
+        <include file="$(find-pkg-share piper_bringup)/launch/piper.launch.xml">
+            <arg name="rviz" value="false"/>
+            <arg name="mock_hardware" value="true"/>
+        </include>
+    </group>
+
+    <let name="robot_description_semantic"
+         value="$(command 'xacro $(find-pkg-share piper_moveit_config)/config/piper.srdf.xacro')" />
+
+    <!-- MoveGroup -->
+    <node pkg="moveit_ros_move_group" exec="move_group" output="screen">
+        <param name="robot_description_semantic" value="$(var robot_description_semantic)" type="str" />
+        <param from="$(find-pkg-share piper_moveit_config)/config/ompl_planning.yaml" />
+        <param from="$(find-pkg-share piper_moveit_config)/config/kinematics.yaml" />
+        <param from="$(find-pkg-share piper_moveit_config)/config/joint_limits.yaml" />
+        <param from="$(find-pkg-share piper_moveit_config)/config/moveit_controllers.yaml" />
+        <param name="publish_robot_description_semantic" value="true" />
+        <param name="use_sim_time" value="$(var sim_gazebo)" />
+    </node>
+
+    <!-- RViz -->
+    <group if="$(var rviz)">
+        <node pkg="rviz2" exec="rviz2" name="rviz2" args="-d $(find-pkg-share piper_moveit_config)/config/moveit.rviz">
+            <param from="$(find-pkg-share piper_moveit_config)/config/ompl_planning.yaml" />
+            <param from="$(find-pkg-share piper_moveit_config)/config/kinematics.yaml" />
+            <param from="$(find-pkg-share piper_moveit_config)/config/joint_limits.yaml" />
+            <param from="$(find-pkg-share piper_moveit_config)/config/moveit_controllers.yaml" />
+            <param name="use_sim_time" value="$(var sim_gazebo)" />
+        </node>
+    </group>
+</launch>
