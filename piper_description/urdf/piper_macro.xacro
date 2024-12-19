@@ -29,7 +29,6 @@
       </xacro:piper_gripper>
     </xacro:if>
 
-    <!-- ros2 control is only used for simulation -->
     <xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
     <xacro:property name="ros2_control_name" value="${prefix}piper_control"/>
     <xacro:piper_ros2_control
