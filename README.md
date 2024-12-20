@@ -18,13 +18,27 @@ ros2 launch piper_description view_urdf.launch.xml
 ## Simulating with Mock Hardware
 
 ```
-ros2 launch piper_bringup piper.launch.xml mock_hardware:=true
+ros2 launch piper_bringup piper.launch.xml mock_hardware:=true rviz:=true
 ```
 
 ## Simulating with Gazebo
 
 ```
 ros2 launch piper_bringup gazebo_piper.launch.py headless:=false rviz:=true
+```
+
+## MoveIt Example Configuration
+
+To try out the included MoveIt configuration you can use Mock Hardware or Gazebo.
+
+If simulating with Mock Hardware no additional arguments are needed to start Moveit.
+```
+ros2 launch piper_moveit_config demo.launch.xml
+```
+
+If simulating with Gazebo:
+```
+ros2 launch piper_moveit_config demo.launch.xml sim_gazebo:=true
 ```
 
 ## Testing Available ROS2 Controllers

@@ -1,0 +1,47 @@
+/**:
+  ros__parameters:
+    robot_description_planning:
+      default_velocity_scaling_factor: 1.0
+      default_acceleration_scaling_factor: 1.0
+
+      joint_limits:
+        gripper_joint:
+          has_velocity_limits: true
+          max_velocity: 1.0
+          has_acceleration_limits: true
+          max_acceleration: 1.0
+        joint_1:
+          has_velocity_limits: true
+          max_velocity: 3.14
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        joint_2:
+          has_velocity_limits: true
+          max_velocity: 3.4
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        joint_3:
+          has_velocity_limits: true
+          max_velocity: 3.14
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        joint_4:
+          has_velocity_limits: true
+          max_velocity: 3.93
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        joint_5:
+          has_velocity_limits: true
+          max_velocity: 3.93
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        joint_6:
+          has_velocity_limits: true
+          max_velocity: 3.93
+          has_acceleration_limits: true
+          max_acceleration: 10.0
+        mimic_gripper_joint:
+          has_velocity_limits: true
+          max_velocity: 1.0
+          has_acceleration_limits: true
+          max_acceleration: 1.0
