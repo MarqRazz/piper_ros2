@@ -60,6 +60,11 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 }" -1
 ```
 
+or the same via the action interface:
+```
+ros2 action send_goal /joint_trajectory_controller/follow_joint_trajectory control_msgs/action/FollowJointTrajectory "{ trajectory: { joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6], points: [    { positions: [0.0, 0.85, -0.75, 0.0, 0.5, 0.0], time_from_start: { sec: 2 } },  ]}}"
+```
+
 - To send an action goal to the `gripper_controller`:
 ```bash
 ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [gripper_joint], position: [0.03]}}"
