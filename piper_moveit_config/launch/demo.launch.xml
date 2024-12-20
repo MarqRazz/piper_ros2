@@ -2,6 +2,7 @@
 <launch>
     <arg name="rviz" default="true"/>
     <arg name="sim_gazebo" default="false"/>
+    <arg name="mock_hardware" default="true"/>
 
     <group if="$(var sim_gazebo)">
         <include file="$(find-pkg-share piper_bringup)/launch/gazebo_piper.launch.py"/>
@@ -9,7 +10,7 @@
     <group unless="$(var sim_gazebo)">
         <include file="$(find-pkg-share piper_bringup)/launch/piper.launch.xml">
             <arg name="rviz" value="false"/>
-            <arg name="mock_hardware" value="true"/>
+            <arg name="mock_hardware" value="$(var mock_hardware)"/>
         </include>
     </group>
 
