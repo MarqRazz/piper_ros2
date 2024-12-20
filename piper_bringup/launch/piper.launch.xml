@@ -25,4 +25,15 @@
     <group if="$(var rviz)">
         <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share piper_bringup)/rviz/robotmodel.rviz" output="both"/>
     </group>
+
+    <!-- official python CAN driver -->
+    <group unless="$(var mock_hardware)">
+        <node pkg="piper" exec="piper_single_ctrl" output="both">
+            <param name="can_port" value="can0"/>
+            <param name="auto_enable" value="true"/>
+            <param name="rviz_ctrl_flag" value="false"/>
+            <param name="gripper_exist" value="true"/>
+        </node>
+    </group>
+
 </launch>
