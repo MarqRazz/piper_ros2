@@ -4,7 +4,7 @@
     <!-- Arguments -->
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="sim_gazebo" default="false" />
-    <xacro:arg name="sim_isaac" default="false" />
+    <xacro:arg name="joint_state_topic_hardware" default="false" />
     <xacro:arg name="mock_hardware" default="false" />
 
     <!-- Import macros for main hardware components -->
@@ -42,9 +42,9 @@
     <xacro:load_piper
         parent="table"
         prefix="$(arg prefix)"
+        joint_state_topic_hardware="$(arg joint_state_topic_hardware)"
         mock_hardware="$(arg mock_hardware)"
         sim_gazebo="$(arg sim_gazebo)"
-        sim_isaac="$(arg sim_isaac)"
         initial_positions="${xacro.load_yaml(initial_positions_file)}">
       <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
     </xacro:load_piper>

@@ -8,9 +8,9 @@
     mock_hardware:=false
     fake_sensor_commands:=false
     sim_gazebo:=false
-    sim_isaac:=false
-    isaac_joint_commands:=/isaac_joint_commands
-    isaac_joint_states:=/isaac_joint_states
+    joint_state_topic_hardware:=false
+    joint_commands_topic:=/joint_commands_topic
+    joint_states_topic:=/joint_states_topic
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}">
 
     <ros2_control name="${name}" type="system">
@@ -18,21 +18,17 @@
         <xacro:if value="${sim_gazebo}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </xacro:if>
-        <xacro:if value="${sim_isaac}">
+        <!-- This supports Isaac sim and Hardware -->
+        <xacro:if value="${joint_state_topic_hardware}">
           <plugin>joint_state_topic_hardware_interface/JointStateTopicSystem</plugin>
-          <param name="joint_commands_topic">${isaac_joint_commands}</param>
-          <param name="joint_states_topic">${isaac_joint_states}</param>
+          <param name="joint_commands_topic">${joint_commands_topic}</param>
+          <param name="joint_states_topic">${joint_states_topic}</param>
         </xacro:if>
         <xacro:if value="${mock_hardware}">
           <plugin>mock_components/GenericSystem</plugin>
           <param name="fake_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
-        <xacro:unless value="${mock_hardware or sim_gazebo or sim_isaac}">
-          <plugin>joint_state_topic_hardware_interface/JointStateTopicSystem</plugin>
-          <param name="joint_commands_topic">/joint_ctrl_single</param>
-          <param name="joint_states_topic">/joint_states_single</param>
-        </xacro:unless>
       </hardware>
 
       <joint name="${prefix}joint_1">
