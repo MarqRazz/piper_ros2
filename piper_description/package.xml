@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>piper_description</name>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <description>URDF description for the Piper Robot and optional Gripper</description>
 
   <maintainer email="marq.razz@gmail.com">Marq Rasmussen</maintainer>
