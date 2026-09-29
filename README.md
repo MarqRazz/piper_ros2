@@ -15,6 +15,29 @@ ros2 launch piper_description view_urdf.launch.xml
 <img src="docs/piper_urdf.png"  width="75%" >
 
 
+## Using piper_description in your own robot
+
+The `xacro:load_piper` macro (`piper_description/urdf/piper_macro.xacro`) only builds the kinematic/visual description of the arm and (optionally) the gripper.
+It does **not** add a `<ros2_control>` block.
+If your robot uses ros2_control, you are responsible for including `piper.ros2_control.xacro` (or your own ros2_control xacro, e.g. one combined system for a multi-arm robot) and calling it yourself:
+
+```xml
+<xacro:include filename="$(find piper_description)/urdf/piper_macro.xacro" />
+<xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
+
+<xacro:load_piper parent="base_link" prefix="" include_gripper="true">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+</xacro:load_piper>
+
+<xacro:piper_ros2_control
+    name="piper_control"
+    prefix=""
+    include_gripper="true"
+    mock_hardware="true"/>
+```
+
+See `piper_description/urdf/piper.urdf.xacro` for a complete example.
+
 ## Simulating with Mock Hardware
 
 ```

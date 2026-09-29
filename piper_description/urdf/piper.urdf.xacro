@@ -41,13 +41,22 @@
 
     <xacro:load_piper
         parent="table"
-        prefix="$(arg prefix)"
-        joint_state_topic_hardware="$(arg joint_state_topic_hardware)"
-        mock_hardware="$(arg mock_hardware)"
-        sim_gazebo="$(arg sim_gazebo)"
-        initial_positions="${xacro.load_yaml(initial_positions_file)}">
+        prefix="$(arg prefix)">
       <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
     </xacro:load_piper>
+
+    <!-- load_piper does not add ros2_control; include it explicitly -->
+    <xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
+    <xacro:piper_ros2_control
+        name="$(arg prefix)piper_control"
+        prefix="$(arg prefix)"
+        include_gripper="true"
+        joint_state_topic_hardware="$(arg joint_state_topic_hardware)"
+        mock_hardware="$(arg mock_hardware)"
+        joint_commands_topic="/joint_commands_topic"
+        joint_states_topic="/joint_states_topic"
+        sim_gazebo="$(arg sim_gazebo)"
+        initial_positions="${xacro.load_yaml(initial_positions_file)}"/>
 
     <xacro:if value="$(arg sim_gazebo)">
         <xacro:include filename="$(find piper_description)/urdf/piper.gazebo.xacro" />
