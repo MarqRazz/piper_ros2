@@ -1,17 +1,22 @@
 <?xml version="1.0"?>
+<!--
+  load_piper: builds the kinematic/visual description of the Piper arm and
+  (optionally) its gripper.
+
+  NOTE: this macro does NOT add a <ros2_control> block. If your robot uses
+  ros2_control, the caller is responsible for including
+  $(find piper_description)/urdf/piper.ros2_control.xacro and calling
+  xacro:piper_ros2_control (or providing its own ros2_control xacro, e.g. a
+  single combined system for a multi-arm robot). See piper.urdf.xacro for an
+  example.
+-->
 <robot name="piper" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:macro name="load_piper" params="
     parent
     prefix
     *origin
-    include_gripper:=true
-    sim_gazebo:=false
-    joint_commands_topic:=/joint_commands_topic
-    joint_states_topic:=/joint_states_topic
-    joint_state_topic_hardware:=false
-    mock_hardware:=true
-    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}">
+    include_gripper:=true">
 
     <xacro:include filename="$(find piper_description)/urdf/piper_arm_macro.xacro" />
     <xacro:piper_arm
@@ -28,18 +33,5 @@
         <origin xyz="0 0 0" rpy="0 0 0" />  <!-- gripper mounts directly to the arms tool flange -->
       </xacro:piper_gripper>
     </xacro:if>
-
-    <xacro:include filename="$(find piper_description)/urdf/piper.ros2_control.xacro" />
-    <xacro:property name="ros2_control_name" value="${prefix}piper_control"/>
-    <xacro:piper_ros2_control
-      name="${ros2_control_name}"
-      prefix="${prefix}"
-      include_gripper="${include_gripper}"
-      joint_state_topic_hardware="${joint_state_topic_hardware}"
-      mock_hardware="${mock_hardware}"
-      joint_commands_topic="${joint_commands_topic}"
-      joint_states_topic="${joint_states_topic}"
-      sim_gazebo="${sim_gazebo}"
-      initial_positions="${initial_positions}"/>
   </xacro:macro>
 </robot>
